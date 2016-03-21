@@ -2,6 +2,8 @@ package com.example.smartmonitoring;
 
 import java.io.IOException;
 
+import nio.server.client.Client;
+import nio.server.client.Controller;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -34,7 +36,8 @@ public class MainActivity extends Activity {
     Button button;
     public Handler handler;  
     boolean tcpFlag = false;
-
+    
+   
     
 	private static String tmp = ""; 
 	
@@ -77,14 +80,16 @@ public class MainActivity extends Activity {
 		EditViewIP4.setText("104");
 		EditViewPort.setText("8040");
 		
-		
+
 		
 		button.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				 NIOSocketClient tcpClient = null;
+//				 NIOSocketClient tcpClient = null;
+				NIOThread nioThread;
+				nioThread = new NIOThread();
 				if(tcpFlag == false){
 					String ip1 = EditViewIP1.getText().toString();
 					String ip2 = EditViewIP2.getText().toString();
@@ -92,81 +97,111 @@ public class MainActivity extends Activity {
 					String ip4 = EditViewIP4.getText().toString();
 					String port = EditViewPort.getText().toString();
 					
-					if(Integer.parseInt(ip1)>255&&Integer.parseInt(ip1)<0){
-						return;
+					try{					
+						if(Integer.parseInt(ip1)>255||Integer.parseInt(ip1)<0){
+							Toast.makeText(getApplicationContext(), "IP地址输入有误", Toast.LENGTH_SHORT).show();
+							return;
+						}
+						if(Integer.parseInt(ip2)>255||Integer.parseInt(ip2)<0){
+							Toast.makeText(getApplicationContext(), "IP地址输入有误", Toast.LENGTH_SHORT).show();
+							return;
+						}
+						if(Integer.parseInt(ip3)>255||Integer.parseInt(ip3)<0){
+							Toast.makeText(getApplicationContext(), "IP地址输入有误", Toast.LENGTH_SHORT).show();
+							return;
+						}
+						if(Integer.parseInt(ip4)>255||Integer.parseInt(ip4)<0){
+							Toast.makeText(getApplicationContext(), "IP地址输入有误", Toast.LENGTH_SHORT).show();
+							return;
+						}
+						if(Integer.parseInt(port)>65535||Integer.parseInt(port)<=0){
+							Toast.makeText(getApplicationContext(), "端口输入有误", Toast.LENGTH_SHORT).show();
+							return;
+						}
+						String ip = ip1+"."+ip2+"."+ip3+"."+ip4;
+						debug("ip = "+ip);
+						debug("port = "+port);
+						nioThread.init(ip, Integer.parseInt(port),handler);
+						nioThread.start();
+						button.setClickable(false);
+						button.setText("连接中");
 					}
-					if(Integer.parseInt(ip2)>255&&Integer.parseInt(ip2)<0){
-						return;
+					catch(java.lang.NumberFormatException e)
+					{
+						Toast.makeText(getApplicationContext(), "IP地址端口输入有误", Toast.LENGTH_SHORT).show();
+						e.printStackTrace();
 					}
-					if(Integer.parseInt(ip3)>255&&Integer.parseInt(ip3)<0){
-						return;
-					}
-					if(Integer.parseInt(ip4)>255&&Integer.parseInt(ip4)<0){
-						return;
-					}
-					if(Integer.parseInt(port)>65535&&Integer.parseInt(port)<0){
-						return;
-					}
-					String ip = ip1+"."+ip2+"."+ip3+"."+ip4;
-					debug("ip = "+ip);
-					debug("port = "+port);
-					
-//			        NIOClient client;
-//					try {
-//						client = new NIOClient(ip, Integer.parseInt(port));
-//				        client.sendMsg("This is a NIOClient, testing");
-//				        client.end();
-//					} catch (IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-
-			        
-					
-				   
-					tcpClient = new NIOSocketClient();
-					tcpClient.init(ip, Integer.parseInt(port));
-					tcpClient.setHandler(handler);
-					tcpClient.start();
-					button.setClickable(false);
-					button.setText("连接中");
-										
 				}
 				else{
 					//已经连接成功了,再按下就断开连接
-					tcpClient.close();
+					debug("close");
+//					tcpClient.close();
+					try{
+            			Message msg2 = new Message();    
+        				msg2.what = 3;    
+        				handler.sendMessage(msg2);
+						nioThread.close();			
+					}
+					catch(Exception e){
+						e.printStackTrace();
+					}
+					
 				}
 			}
 		});
 		
-			handler = new Handler(){
-		    	public void handleMessage(Message msg){    
-		    		switch(msg.what){
-		     			case 1:
-		     				//连接成功
-		     				//按下按键能够关闭tcp连接
-		     				Toast.makeText(getApplicationContext(), "连接服务器成功", Toast.LENGTH_SHORT).show();
-		     				tcpFlag = true;
-		     				button.setClickable(true);
-		     				button.setText("断开");
-	        			break;
-		     			case 2:
-		     				//连接失败
-		     				Toast.makeText(getApplicationContext(), "连接服务器失败", Toast.LENGTH_SHORT).show();
-		     				tcpFlag = false;
-		     				button.setText("连接");
-		     				button.setClickable(true);
-	        			break;
-		     			case 3:
-		     				//连接失败
-		     				Toast.makeText(getApplicationContext(), "断开服务器成功", Toast.LENGTH_SHORT).show();
-		     				tcpFlag = false;
-		     				button.setText("连接");
-		     				button.setClickable(true);
-	        			break;
-	        		}
-		    	}
-			};
+		handler = new Handler(){
+	    	public void handleMessage(Message msg){    
+	    		switch(msg.what){
+	     			case 1:
+	     				//连接成功
+	     				//按下按键能够关闭tcp连接
+	     				Toast.makeText(getApplicationContext(), "连接服务器成功", Toast.LENGTH_SHORT).show();
+	     				tcpFlag = true;
+	     				button.setClickable(true);
+	     				button.setText("断开");
+        			break;
+	     			case 2:
+	     				//连接失败
+	     				Toast.makeText(getApplicationContext(), "连接服务器失败", Toast.LENGTH_SHORT).show();
+	     				tcpFlag = false;
+	     				button.setText("连接");
+	     				button.setClickable(true);
+        			break;
+	     			case 3:
+	     				//连接失败
+	     				Toast.makeText(getApplicationContext(), "断开服务器成功", Toast.LENGTH_SHORT).show();
+	     				tcpFlag = false;
+	     				button.setText("连接");
+	     				button.setClickable(true);
+        			break;
+	     			case 4:
+	     			{
+        				Bundle bundle = new Bundle();
+        				bundle = msg.getData();
+        				String voltage = bundle.getString("voltage");
+        				String current = bundle.getString("current");
+        				String humidity = bundle.getString("humidity");
+        				String meet = bundle.getString("meet");
+        				String tempeture = bundle.getString("tempeture");
+        				
+        				if(voltage != null && voltage != ""){
+        					TextViewVoltage.setText(voltage+"V");
+        				}
+						if(current != null && current != ""){
+							TextViewCurrent.setText(current+"A");
+						}
+						if(humidity != null && humidity != ""){
+							TextViewHumidity.setText(humidity+"%");
+						}
+						if(tempeture != null && tempeture != ""){
+							TextViewTempeture.setText(tempeture+"℃");
+						}
+	     			}
+	     			break;
+        		}
+	    	}
+		};
 			
 	}
 
