@@ -170,8 +170,6 @@
         android:minEms="3"
         android:inputType="number" 
         android:textSize="40px" >
-
-        <requestFocus />
     </EditText>
 
     <TextView
@@ -196,6 +194,15 @@
         android:maxLength="5"
         android:minEms="4"
         android:textSize="40px" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:text="设置" />
 
 </RelativeLayout>
 

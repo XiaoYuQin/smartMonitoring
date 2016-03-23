@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,10 +35,15 @@ public class MainActivity extends Activity {
 	EditText EditViewIP4;
 	EditText EditViewPort;
     Button button;
+    Button button2;
+
     public Handler handler;  
     boolean tcpFlag = false;
     
-   
+    float maxTemp;
+    float maxShiDu;
+    float maxVoltage;
+    float maxCurrent;
     
 	private static String tmp = ""; 
 	
@@ -58,14 +64,17 @@ public class MainActivity extends Activity {
 		TextViewVoltage = (TextView)findViewById(R.id.TextView05);
 		TextViewCurrent = (TextView)findViewById(R.id.TextView06);
 		button = (Button)findViewById(R.id.button1);
-		
+		button2 = (Button)findViewById(R.id.button2);
+
+	 
 		EditViewIP1 = (EditText)findViewById(R.id.EditText01);
 		EditViewIP2 = (EditText)findViewById(R.id.editText1);
 		EditViewIP3 = (EditText)findViewById(R.id.EditText02);
 		EditViewIP4 = (EditText)findViewById(R.id.EditText03);
 		EditViewPort = (EditText)findViewById(R.id.EditText04);
+
 		
-		
+		debug("22222");
 		button.setText("连接");
 		
 		TextViewTempeture.setText("0℃");
@@ -73,14 +82,22 @@ public class MainActivity extends Activity {
 		
 		TextViewVoltage.setText("0V");
 		TextViewCurrent.setText("0A");
-		
+		debug("33333");
 		EditViewIP1.setText("192");
 		EditViewIP2.setText("168");
 		EditViewIP3.setText("3");
 		EditViewIP4.setText("104");
 		EditViewPort.setText("8040");
-		
-
+		debug("11111");
+		button2.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+				startActivity(intent);//打开新的activity
+			}
+		});
+	
 		
 		button.setOnClickListener(new View.OnClickListener() {
 			
