@@ -107,6 +107,7 @@ public class ListenerThreadClient extends Thread {
 								当前电压值：250V
 								当前电流值：48A
 								当前湿度比：50%
+								当前温度：60℃
 								是否满足：是
                              * */
                             data += charBuffer.toString();

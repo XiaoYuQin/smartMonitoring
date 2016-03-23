@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView3"
-        android:layout_marginTop="99dp"
+        android:layout_marginTop="45dp"
         android:textSize="65px"
         android:text="电流上限" />
 
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/EditText02"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="45dp"
         android:textSize="65px"
         android:text="电压上限" />
 
@@ -50,68 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView1"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="45dp"
         android:textSize="65px"
         android:text="湿度上限" />
-
-    <EditText
-        android:id="@+id/EditText04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/textView4"
-        android:background="@android:drawable/edit_text"
-        android:ems="10"
-        android:inputType="number"
-        android:maxLength="3"
-        android:minEms="3"
-        android:textSize="40px" />
-
-    <EditText
-        android:id="@+id/EditText03"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView4"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/textView3"
-        android:background="@android:drawable/edit_text"
-        android:ems="10"
-        android:inputType="number"
-        android:maxLength="3"
-        android:minEms="3"
-        android:textSize="40px" />
-
-    <EditText
-        android:id="@+id/EditText02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/textView2"
-        android:background="@android:drawable/edit_text"
-        android:ems="10"
-        android:inputType="number"
-        android:maxLength="3"
-        android:minEms="3"
-        android:textSize="40px" />
-
-    <EditText
-        android:id="@+id/EditText01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_alignLeft="@+id/EditText02"
-        android:layout_alignParentRight="true"
-        android:background="@android:drawable/edit_text"
-        android:ems="10"
-        android:inputType="number"
-        android:maxLength="3"
-        android:minEms="3"
-        android:textSize="40px" >
-
-        <requestFocus />
-    </EditText>
 
     <Button
         android:id="@+id/button1"
@@ -121,7 +62,62 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@+id/button2"
-        android:text="确定" />
+        android:text="设置" />
+
+    <EditText
+        android:id="@+id/EditText01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/textView1"
+        android:background="@android:drawable/edit_text"
+        android:ems="10"
+        android:minEms="3"
+        android:textSize="40px" />
+
+    <EditText
+        android:id="@+id/EditText02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/textView2"
+        android:background="@android:drawable/edit_text"
+        android:ems="10"
+        android:minEms="3"
+        android:textSize="40px" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/EditText03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/textView3"
+        android:background="@android:drawable/edit_text"
+        android:ems="10"
+        android:minEms="3"
+        android:textSize="40px" />
+
+    <EditText
+        android:id="@+id/EditText04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignLeft="@+id/EditText03"
+        android:layout_alignParentRight="true"
+        android:background="@android:drawable/edit_text"
+        android:ems="10"
+        android:minEms="3"
+        android:textSize="40px" />
 
 </RelativeLayout>
 

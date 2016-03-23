@@ -34,8 +34,24 @@ public class MainActivity extends Activity {
 	EditText EditViewIP3;
 	EditText EditViewIP4;
 	EditText EditViewPort;
+	
+	TextView LimitTempeture;
+	TextView LimitHumidity;
+	TextView LimitVoltage;
+	TextView LimitCurrent;
+	
     Button button;
-    Button button2;
+    Button Button01;
+	EditText EditTextTemp;
+	EditText EditTextHua;
+	EditText EditTextVol;
+	EditText EditTextCur;
+	
+	TextView TextView14;
+	TextView TextView15;
+	TextView TextView16;
+	TextView TextView17;
+
 
     public Handler handler;  
     boolean tcpFlag = false;
@@ -64,7 +80,7 @@ public class MainActivity extends Activity {
 		TextViewVoltage = (TextView)findViewById(R.id.TextView05);
 		TextViewCurrent = (TextView)findViewById(R.id.TextView06);
 		button = (Button)findViewById(R.id.button1);
-		button2 = (Button)findViewById(R.id.button2);
+		Button01 = (Button)findViewById(R.id.Button01);
 
 	 
 		EditViewIP1 = (EditText)findViewById(R.id.EditText01);
@@ -74,30 +90,78 @@ public class MainActivity extends Activity {
 		EditViewPort = (EditText)findViewById(R.id.EditText04);
 
 		
+		EditTextTemp = (EditText)findViewById(R.id.EditText05);
+		EditTextHua = (EditText)findViewById(R.id.EditText06);
+		EditTextVol = (EditText)findViewById(R.id.EditText07);
+		EditTextCur = (EditText)findViewById(R.id.EditText08);
+		
+		TextView14 = (TextView)findViewById(R.id.TextView14);
+		TextView15 = (TextView)findViewById(R.id.TextView15);
+		TextView16 = (TextView)findViewById(R.id.TextView16);
+		TextView17 = (TextView)findViewById(R.id.TextView17);
+		
+
+		
 		debug("22222");
 		button.setText("连接");
 		
-		TextViewTempeture.setText("0℃");
-		TextViewHumidity.setText("123%");
+		TextViewTempeture.setText("---℃");
+		TextViewHumidity.setText("---%");
 		
-		TextViewVoltage.setText("0V");
-		TextViewCurrent.setText("0A");
+		TextViewVoltage.setText("---V");
+		TextViewCurrent.setText("---A");
 		debug("33333");
-		EditViewIP1.setText("192");
-		EditViewIP2.setText("168");
-		EditViewIP3.setText("3");
-		EditViewIP4.setText("104");
-		EditViewPort.setText("8040");
+//		EditViewIP1.setText("192");
+//		EditViewIP2.setText("168");
+//		EditViewIP3.setText("3");
+//		EditViewIP4.setText("104");
+//		EditViewPort.setText("8040");
+		
+		maxTemp = 100;
+		maxShiDu = 80;
+		maxVoltage = 220;
+		maxCurrent = 50;
+		
+		TextView14.setText(""+maxTemp+"℃");
+		TextView15.setText(""+maxShiDu+"%");
+		TextView16.setText(""+maxVoltage+"V");
+		TextView17.setText(""+maxCurrent+"A");
+		
+//		 Intent intent=getIntent();//getIntent将该项目中包含的原始intent检索出来，将检索出来的intent赋值给一个Intent类型的变量intent   
+//	     Bundle bundle=intent.getExtras();//.getExtras()得到intent所附带的额外数据
+//	     maxTemp=bundle.getFloat("temp");   
+//	     maxShiDu=bundle.getFloat("ham");   
+//	     maxVoltage=bundle.getFloat("vol");   
+//	     maxCurrent=bundle.getFloat("cur");   	    
+
 		debug("11111");
-		button2.setOnClickListener(new View.OnClickListener() {
-			
+
+		Button01.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-				startActivity(intent);//打开新的activity
+				
+				try{			
+					
+				    maxTemp = Float.parseFloat(EditTextTemp.getText().toString());
+					TextView14.setText(""+maxTemp+"℃");
+				    debug("maxTemp = "+maxTemp);
+				    maxShiDu = Float.parseFloat(EditTextHua.getText().toString());
+				    debug("maxShiDu = "+maxShiDu);
+				    TextView15.setText(""+maxShiDu+"%");
+				    maxVoltage = Float.parseFloat(EditTextVol.getText().toString());
+				    debug("maxVoltage = "+maxVoltage);
+				    TextView16.setText(""+maxVoltage+"V");
+				    maxCurrent = Float.parseFloat(EditTextCur.getText().toString());	
+				    TextView17.setText(""+maxCurrent+"A");
+				    debug("maxCurrent = "+maxCurrent);
+				}
+				catch(java.lang.NumberFormatException e)
+				{
+//					Toast.makeText(getApplicationContext(), "输入数据有误", Toast.LENGTH_SHORT).show();
+					e.printStackTrace();
+				}
 			}
 		});
-	
 		
 		button.setOnClickListener(new View.OnClickListener() {
 			
@@ -198,22 +262,127 @@ public class MainActivity extends Activity {
         				bundle = msg.getData();
         				String voltage = bundle.getString("voltage");
         				String current = bundle.getString("current");
-        				String humidity = bundle.getString("humidity");
-        				String meet = bundle.getString("meet");
+        				String humidity = bundle.getString("humidity");        		
         				String tempeture = bundle.getString("tempeture");
         				
         				if(voltage != null && voltage != ""){
         					TextViewVoltage.setText(voltage+"V");
+        					try{			
+        					    float value = Float.parseFloat(voltage);
+        					    if(value > maxVoltage){
+
+          					    	 final AlertDialog adRef = new AlertDialog.Builder(MainActivity.this).create();  
+        					         adRef.setTitle("警告！");  
+        					         adRef.setMessage("电压超限");  
+        					         adRef.show();  
+        					    	
+        					    	Handler handler = new Handler();  
+        					        handler.postDelayed(new Runnable() {  
+        					 
+        					            public void run() {  
+        					                adRef.dismiss();  
+        					            }  
+        					        }, 3000);  
+        					    }
+        					}
+        					catch(java.lang.NumberFormatException e)
+        					{
+        						Toast.makeText(getApplicationContext(), "电压数据错误", Toast.LENGTH_SHORT).show();
+        						e.printStackTrace();
+        					}
         				}
 						if(current != null && current != ""){
 							TextViewCurrent.setText(current+"A");
+        					try{			
+        					    float value = Float.parseFloat(current);
+        					    if(value > maxCurrent){
+	        					   	final AlertDialog adRef = new AlertDialog.Builder(MainActivity.this).create();  
+	        					   	adRef.setTitle("警告！");  
+	        					   	adRef.setMessage("电流超限"); 
+	    					        adRef.show();  
+	    					    	
+	    					    	Handler handler = new Handler();  
+	    					        handler.postDelayed(new Runnable() {  
+	    					 
+	    					            public void run() {  
+	    					                adRef.dismiss();  
+	    					            }  
+	    					        }, 3000);  
+        					    }
+        					}
+        					catch(java.lang.NumberFormatException e)
+        					{
+        						Toast.makeText(getApplicationContext(), "电流数据错误", Toast.LENGTH_SHORT).show();
+        						e.printStackTrace();
+        					}
 						}
 						if(humidity != null && humidity != ""){
 							TextViewHumidity.setText(humidity+"%");
+        					try{			
+        					    float value = Float.parseFloat(humidity);
+        					    if(value > maxShiDu){
+
+          					    	 final AlertDialog adRef = new AlertDialog.Builder(MainActivity.this).create();  
+          					    	adRef.setTitle("警告！");  
+       					         adRef.setMessage("湿度超限");
+        					         adRef.show();  
+        					    	
+        					    	Handler handler = new Handler();  
+        					        handler.postDelayed(new Runnable() {  
+        					 
+        					            public void run() {  
+        					                adRef.dismiss();  
+        					            }  
+        					        }, 3000);  
+        					    }
+        					}
+        					catch(java.lang.NumberFormatException e)
+        					{
+        						Toast.makeText(getApplicationContext(), "湿度数据错误", Toast.LENGTH_SHORT).show();
+        						e.printStackTrace();
+        					}
 						}
 						if(tempeture != null && tempeture != ""){
 							TextViewTempeture.setText(tempeture+"℃");
+        					try{			
+           					    float value = Float.parseFloat(tempeture);
+        					    if(value > maxTemp){
+	        					   	final AlertDialog adRef = new AlertDialog.Builder(MainActivity.this).create();  
+	        					   	adRef.setTitle("警告！");  
+	        					   	adRef.setMessage("温度超限");  
+	    					        adRef.show();  
+	    					    	
+	    					    	Handler handler = new Handler();  
+	    					        handler.postDelayed(new Runnable() {  
+	    					 
+	    					            public void run() {  
+	    					                adRef.dismiss();  
+	    					            }  
+	    					        }, 3000);  
+        					    }
+        					}
+        					catch(java.lang.NumberFormatException e)
+        					{
+        						Toast.makeText(getApplicationContext(), "温度数据错误", Toast.LENGTH_SHORT).show();
+        						e.printStackTrace();
+        					}
 						}
+	     			}
+	     			break;
+	     			case 5:
+	     			{
+	     				
+        				Bundle bundle = new Bundle();
+        				bundle = msg.getData();
+        				maxTemp = bundle.getFloat("temp");
+        				maxShiDu = bundle.getFloat("ham");
+        				maxVoltage = bundle.getFloat("vol");
+        				maxCurrent = bundle.getFloat("cur");
+        				debug(""+maxTemp);
+        				debug(""+maxShiDu);
+        				debug(""+maxVoltage);
+        				debug(""+maxCurrent);
+        				
 	     			}
 	     			break;
         		}
