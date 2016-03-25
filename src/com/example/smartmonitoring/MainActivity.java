@@ -145,18 +145,39 @@ public class MainActivity extends Activity {
 				    maxTemp = Float.parseFloat(EditTextTemp.getText().toString());
 					TextView14.setText(""+maxTemp+"℃");
 				    debug("maxTemp = "+maxTemp);
+				}
+				catch(java.lang.NumberFormatException e)
+				{
+//					Toast.makeText(getApplicationContext(), "输入数据有误", Toast.LENGTH_SHORT).show();
+					e.printStackTrace();
+				}
+				try{			
 				    maxShiDu = Float.parseFloat(EditTextHua.getText().toString());
 				    debug("maxShiDu = "+maxShiDu);
 				    TextView15.setText(""+maxShiDu+"%");
+				}
+				catch(java.lang.NumberFormatException e)
+				{
+//					Toast.makeText(getApplicationContext(), "输入数据有误", Toast.LENGTH_SHORT).show();
+					e.printStackTrace();
+				}
+				try{			
 				    maxVoltage = Float.parseFloat(EditTextVol.getText().toString());
 				    debug("maxVoltage = "+maxVoltage);
 				    TextView16.setText(""+maxVoltage+"V");
+				}
+				catch(java.lang.NumberFormatException e)
+				{
+//					Toast.makeText(getApplicationContext(), "输入数据有误", Toast.LENGTH_SHORT).show();
+					e.printStackTrace();
+				}
+				try{			
 				    maxCurrent = Float.parseFloat(EditTextCur.getText().toString());	
 				    TextView17.setText(""+maxCurrent+"A");
 				    debug("maxCurrent = "+maxCurrent);
 				}
 				catch(java.lang.NumberFormatException e)
-				{
+				{ 
 //					Toast.makeText(getApplicationContext(), "输入数据有误", Toast.LENGTH_SHORT).show();
 					e.printStackTrace();
 				}
