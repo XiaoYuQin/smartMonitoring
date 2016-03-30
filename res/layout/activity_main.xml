@@ -15,7 +15,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="30dp"
         android:text="温度"
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/TextView01"
@@ -25,7 +25,7 @@
         android:layout_below="@+id/textView1"
         android:layout_marginTop="30dp"
         android:text="湿度"
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/TextView02"
@@ -35,7 +35,7 @@
         android:layout_below="@+id/TextView01"
         android:layout_marginTop="30dp"
         android:text="电压"
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/TextView03"
@@ -45,7 +45,7 @@
         android:layout_below="@+id/TextView02"
         android:layout_marginTop="30dp"
         android:text="电流"
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/textView2"
@@ -55,7 +55,7 @@
         android:layout_marginLeft="53dp"
         android:layout_toRightOf="@+id/textView1"
         android:text="TextView"
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/TextView04"
@@ -65,7 +65,7 @@
         android:layout_alignBottom="@+id/TextView01"
         android:layout_alignLeft="@+id/textView2"
         android:text="TextView"
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/TextView05"
@@ -75,7 +75,7 @@
         android:layout_alignBottom="@+id/TextView02"
         android:layout_alignLeft="@+id/TextView04"
         android:text="TextView"
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/TextView06"
@@ -85,7 +85,7 @@
         android:layout_alignBottom="@+id/TextView03"
         android:layout_alignLeft="@+id/TextView05"
         android:text="TextView"
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <Button
         android:id="@+id/button1"
@@ -105,7 +105,8 @@
         android:inputType="number"
         android:maxLength="3"
         android:minEms="3"
-        android:textSize="40px" />
+        android:textStyle="bold"
+        android:textSize="29px" />
 
     <TextView
         android:id="@+id/textView3"
@@ -144,7 +145,8 @@
         android:inputType="number"
         android:maxLength="3"
         android:minEms="3"
-        android:textSize="40px" />
+        android:textStyle="bold"
+        android:textSize="29px" />
 
     <EditText
         android:id="@+id/editText1"
@@ -156,7 +158,8 @@
         android:inputType="number"
         android:maxLength="3"
         android:minEms="3"
-        android:textSize="40px" />
+        android:textStyle="bold"
+        android:textSize="29px" />
 
     <EditText
         android:id="@+id/EditText02"
@@ -168,7 +171,8 @@
         android:inputType="number"
         android:maxLength="3"
         android:minEms="3"
-        android:textSize="40px" >
+        android:textStyle="bold"
+        android:textSize="29px" >
     </EditText>
 
     <TextView
@@ -191,7 +195,8 @@
         android:inputType="number"
         android:maxLength="5"
         android:minEms="4"
-        android:textSize="40px" />
+        android:textStyle="bold"
+        android:textSize="29px" />
 
     <EditText
         android:id="@+id/EditText05"
@@ -205,7 +210,8 @@
         android:inputType="number"
         android:maxLength="5"
         android:minEms="4"
-        android:textSize="40px" />
+        android:textStyle="bold"
+        android:textSize="29px" />
 
     <TextView
         android:id="@+id/TextView10"
@@ -215,7 +221,7 @@
         android:layout_below="@+id/TextView03"
         android:layout_marginTop="60dp"
         android:text="温度阈值"
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/TextView11"
@@ -225,7 +231,7 @@
         android:layout_below="@+id/EditText05"
         android:layout_marginTop="20dp"
         android:text="湿度阈值"
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/TextView12"
@@ -235,7 +241,7 @@
         android:layout_below="@+id/TextView11"
         android:layout_marginTop="20dp"
         android:text="电压阈值"
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/TextView13"
@@ -245,7 +251,7 @@
         android:layout_below="@+id/TextView12"
         android:layout_marginTop="20dp"
         android:text="电流阈值"
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <EditText
         android:id="@+id/EditText06"
@@ -259,7 +265,8 @@
         android:inputType="number"
         android:maxLength="5"
         android:minEms="4"
-        android:textSize="40px" />
+        android:textStyle="bold"
+        android:textSize="29px" />
 
     <EditText
         android:id="@+id/EditText07"
@@ -273,7 +280,8 @@
         android:inputType="number"
         android:maxLength="5"
         android:minEms="4"
-        android:textSize="40px" />
+        android:textStyle="bold"
+        android:textSize="29px" />
 
     <EditText
         android:id="@+id/EditText08"
@@ -287,7 +295,8 @@
         android:inputType="number"
         android:maxLength="5"
         android:minEms="4"
-        android:textSize="40px" />
+        android:textStyle="bold"
+        android:textSize="29px" />
 
     <Button
         android:id="@+id/Button01"
@@ -304,7 +313,7 @@
         android:layout_above="@+id/TextView01"
         android:layout_alignParentRight="true"
         android:text=""
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/TextView15"
@@ -313,7 +322,7 @@
         android:layout_above="@+id/TextView02"
         android:layout_alignParentRight="true"
         android:text=""
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/TextView16"
@@ -322,7 +331,7 @@
         android:layout_above="@+id/TextView03"
         android:layout_alignParentRight="true"
         android:text=""
-        android:textSize="65px" />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/TextView17"
@@ -332,6 +341,6 @@
         android:layout_alignBottom="@+id/TextView06"
         android:layout_alignParentRight="true"
         android:text=""
-        android:textSize="65px" />
+        android:textSize="45px" />
 
 </RelativeLayout>
