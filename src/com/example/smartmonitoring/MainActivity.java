@@ -2,8 +2,12 @@ package com.example.smartmonitoring;
 
 import java.io.IOException;
 
+import com.qinxiaoyu.lib.android.SdCard;
+import com.qinxiaoyu.lib.util.file.FileProperties;
+
 import nio.server.client.Client;
 import nio.server.client.Controller;
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -52,7 +56,9 @@ public class MainActivity extends Activity {
 	TextView TextView16;
 	TextView TextView17;
 
-
+	NIOThread nioThread;
+	
+	
     public Handler handler;  
     boolean tcpFlag = false;
     
@@ -127,6 +133,12 @@ public class MainActivity extends Activity {
 		TextView16.setText(""+maxVoltage+"V");
 		TextView17.setText(""+maxCurrent+"A");
 		
+
+		
+		
+		
+
+		
 //		 Intent intent=getIntent();//getIntent将该项目中包含的原始intent检索出来，将检索出来的intent赋值给一个Intent类型的变量intent   
 //	     Bundle bundle=intent.getExtras();//.getExtras()得到intent所附带的额外数据
 //	     maxTemp=bundle.getFloat("temp");   
@@ -184,73 +196,73 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		button.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-//				 NIOSocketClient tcpClient = null;
-				NIOThread nioThread;
-				nioThread = new NIOThread();
-				if(tcpFlag == false){
-					String ip1 = EditViewIP1.getText().toString();
-					String ip2 = EditViewIP2.getText().toString();
-					String ip3 = EditViewIP3.getText().toString();
-					String ip4 = EditViewIP4.getText().toString();
-					String port = EditViewPort.getText().toString();
-					
-					try{					
-						if(Integer.parseInt(ip1)>255||Integer.parseInt(ip1)<0){
-							Toast.makeText(getApplicationContext(), "IP地址输入有误", Toast.LENGTH_SHORT).show();
-							return;
-						}
-						if(Integer.parseInt(ip2)>255||Integer.parseInt(ip2)<0){
-							Toast.makeText(getApplicationContext(), "IP地址输入有误", Toast.LENGTH_SHORT).show();
-							return;
-						}
-						if(Integer.parseInt(ip3)>255||Integer.parseInt(ip3)<0){
-							Toast.makeText(getApplicationContext(), "IP地址输入有误", Toast.LENGTH_SHORT).show();
-							return;
-						}
-						if(Integer.parseInt(ip4)>255||Integer.parseInt(ip4)<0){
-							Toast.makeText(getApplicationContext(), "IP地址输入有误", Toast.LENGTH_SHORT).show();
-							return;
-						}
-						if(Integer.parseInt(port)>65535||Integer.parseInt(port)<=0){
-							Toast.makeText(getApplicationContext(), "端口输入有误", Toast.LENGTH_SHORT).show();
-							return;
-						}
-						String ip = ip1+"."+ip2+"."+ip3+"."+ip4;
-						debug("ip = "+ip);
-						debug("port = "+port);
-						nioThread.init(ip, Integer.parseInt(port),handler);
-						nioThread.start();
-						button.setClickable(false);
-						button.setText("连接中");
-					}
-					catch(java.lang.NumberFormatException e)
-					{
-						Toast.makeText(getApplicationContext(), "IP地址端口输入有误", Toast.LENGTH_SHORT).show();
-						e.printStackTrace();
-					}
-				}
-				else{
-					//已经连接成功了,再按下就断开连接
-					debug("close");
-//					tcpClient.close();
-					try{
-            			Message msg2 = new Message();    
-        				msg2.what = 3;    
-        				handler.sendMessage(msg2);
-						nioThread.close();			
-					}
-					catch(Exception e){
-						e.printStackTrace();
-					}
-					
-				}
-			}
-		});
+//		button.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+////				 NIOSocketClient tcpClient = null;
+//				NIOThread nioThread;
+//				nioThread = new NIOThread();
+//				if(tcpFlag == false){
+//					String ip1 = EditViewIP1.getText().toString();
+//					String ip2 = EditViewIP2.getText().toString();
+//					String ip3 = EditViewIP3.getText().toString();
+//					String ip4 = EditViewIP4.getText().toString();
+//					String port = EditViewPort.getText().toString();
+//					
+//					try{					
+//						if(Integer.parseInt(ip1)>255||Integer.parseInt(ip1)<0){
+//							Toast.makeText(getApplicationContext(), "IP地址输入有误", Toast.LENGTH_SHORT).show();
+//							return;
+//						}
+//						if(Integer.parseInt(ip2)>255||Integer.parseInt(ip2)<0){
+//							Toast.makeText(getApplicationContext(), "IP地址输入有误", Toast.LENGTH_SHORT).show();
+//							return;
+//						}
+//						if(Integer.parseInt(ip3)>255||Integer.parseInt(ip3)<0){
+//							Toast.makeText(getApplicationContext(), "IP地址输入有误", Toast.LENGTH_SHORT).show();
+//							return;
+//						}
+//						if(Integer.parseInt(ip4)>255||Integer.parseInt(ip4)<0){
+//							Toast.makeText(getApplicationContext(), "IP地址输入有误", Toast.LENGTH_SHORT).show();
+//							return;
+//						}
+//						if(Integer.parseInt(port)>65535||Integer.parseInt(port)<=0){
+//							Toast.makeText(getApplicationContext(), "端口输入有误", Toast.LENGTH_SHORT).show();
+//							return;
+//						}
+//						String ip = ip1+"."+ip2+"."+ip3+"."+ip4;
+//						debug("ip = "+ip);
+//						debug("port = "+port);
+//						nioThread.init(ip, Integer.parseInt(port),handler);
+//						nioThread.start();
+//						button.setClickable(false);
+//						button.setText("连接中");
+//					}
+//					catch(java.lang.NumberFormatException e)
+//					{
+//						Toast.makeText(getApplicationContext(), "IP地址端口输入有误", Toast.LENGTH_SHORT).show();
+//						e.printStackTrace();
+//					}
+//				}
+//				else{
+//					//已经连接成功了,再按下就断开连接
+//					debug("close");
+////					tcpClient.close();
+//					try{
+//            			Message msg2 = new Message();    
+//        				msg2.what = 3;    
+//        				handler.sendMessage(msg2);
+//						nioThread.close();			
+//					}
+//					catch(Exception e){
+//						e.printStackTrace();
+//					}
+//					
+//				}
+//			}
+//		});
 		
 		handler = new Handler(){
 	    	public void handleMessage(Message msg){    
@@ -409,7 +421,23 @@ public class MainActivity extends Activity {
         		}
 	    	}
 		};
+		
+		try
+		{
+			String file_path = SdCard.getSdcardPath()+"/smartMonitoring.config";
+			FileProperties fileProperties  = new FileProperties();
+			String ip = fileProperties.readProperties(file_path, "ip");
+			String port = fileProperties.readProperties(file_path, "port");		
+			nioThread = new NIOThread();
+			nioThread.init(ip, Integer.parseInt(port),handler);
+			nioThread.start();
 			
+		}catch(Exception e)
+		{
+			Toast.makeText(getApplicationContext(), "网络参数有误", Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
+		}
+		
 	}
 
 }

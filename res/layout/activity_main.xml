@@ -93,6 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:visibility="invisible"
         android:text="" />
 
     <EditText
@@ -106,6 +107,7 @@
         android:maxLength="3"
         android:minEms="3"
         android:textStyle="bold"
+        android:visibility="invisible"
         android:textSize="29px" />
 
     <TextView
@@ -115,6 +117,7 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/EditText01"
         android:text="."
+        android:visibility="invisible"
         android:textSize="80px" />
 
     <TextView
@@ -124,6 +127,7 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/editText1"
         android:text="."
+        android:visibility="invisible"
         android:textSize="80px" />
 
     <TextView
@@ -133,6 +137,7 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/EditText02"
         android:text="."
+        android:visibility="invisible"
         android:textSize="80px" />
 
     <EditText
@@ -146,6 +151,7 @@
         android:maxLength="3"
         android:minEms="3"
         android:textStyle="bold"
+        android:visibility="invisible"
         android:textSize="29px" />
 
     <EditText
@@ -159,6 +165,7 @@
         android:maxLength="3"
         android:minEms="3"
         android:textStyle="bold"
+        android:visibility="invisible"
         android:textSize="29px" />
 
     <EditText
@@ -172,6 +179,7 @@
         android:maxLength="3"
         android:minEms="3"
         android:textStyle="bold"
+        android:visibility="invisible"
         android:textSize="29px" >
     </EditText>
 
@@ -183,6 +191,7 @@
         android:layout_alignTop="@+id/EditText03"
         android:layout_toRightOf="@+id/EditText03"
         android:text=":"
+        android:visibility="invisible"
         android:textSize="90px" />
 
     <EditText
@@ -196,6 +205,7 @@
         android:maxLength="5"
         android:minEms="4"
         android:textStyle="bold"
+        android:visibility="invisible"
         android:textSize="29px" />
 
     <EditText

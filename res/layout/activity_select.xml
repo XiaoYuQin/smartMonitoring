@@ -8,7 +8,7 @@
     tools:ignore="MergeRootFrame" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/select_button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -17,11 +17,11 @@
         android:text="连接设备" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/select_button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
+        android:layout_alignLeft="@+id/select_button1"
+        android:layout_below="@+id/select_button1"
         android:layout_marginTop="34dp"
         android:text="查看设备" />
 

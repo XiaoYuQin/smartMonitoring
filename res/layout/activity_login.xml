@@ -14,9 +14,8 @@
         android:layout_alignBottom="@+id/login_textView2"
         android:layout_toRightOf="@+id/login_textView2"
         android:background="@android:drawable/edit_text"
-        android:ems="10"
-        android:maxLength="5"
-        android:minEms="5"
+        android:ems="10"        android:maxLength="6"
+        android:minEms="6"
         android:textStyle="bold" >
 
     </EditText>
@@ -54,8 +53,8 @@
         android:background="@android:drawable/edit_text"
         android:inputType="numberPassword"
         android:ems="10"
-        android:maxLength="5"
-        android:minEms="5"
+        android:maxLength="6"
+        android:minEms="6"
         android:textStyle="bold" />
 
     <CheckBox
